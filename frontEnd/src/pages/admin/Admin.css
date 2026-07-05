@@ -1,0 +1,215 @@
+/* ══════════ Admin Shared Styles ══════════ */
+.admin-layout {
+  display: flex;
+  min-height: 100vh;
+  padding-top: 72px;
+}
+
+/* Sidebar */
+.admin-sidebar {
+  width: 240px;
+  flex-shrink: 0;
+  background: rgba(6,3,12,0.9);
+  border-right: 1px solid var(--color-border);
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  top: 72px; left: 0; bottom: 0;
+  backdrop-filter: blur(20px);
+  overflow-y: auto;
+}
+
+.admin-sidebar__brand {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: var(--space-lg);
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  border-bottom: 1px solid var(--color-border);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.admin-sidebar__nav {
+  display: flex;
+  flex-direction: column;
+  padding: var(--space-md) 0;
+  flex: 1;
+}
+
+.admin-nav-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  padding: 0.75rem var(--space-lg);
+  color: var(--text-muted);
+  font-family: var(--font-heading);
+  font-weight: 500;
+  font-size: 0.9rem;
+  text-decoration: none;
+  transition: all var(--transition-fast);
+  border-left: 3px solid transparent;
+}
+
+.admin-nav-item:hover { color: var(--text-primary); background: var(--color-surface); }
+.admin-nav-item.active {
+  color: var(--color-primary-light);
+  background: rgba(124,58,237,0.08);
+  border-left-color: var(--color-primary);
+}
+
+.admin-sidebar__footer {
+  padding: var(--space-md);
+  border-top: 1px solid var(--color-border);
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.admin-sidebar__user { flex: 1; display: flex; align-items: center; gap: var(--space-sm); }
+.admin-sidebar__avatar {
+  width: 32px; height: 32px;
+  border-radius: 50%;
+  background: var(--gradient-brand);
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 700; color: white; font-size: 0.8rem;
+  flex-shrink: 0;
+}
+.admin-sidebar__logout {
+  padding: 6px;
+  border-radius: var(--radius-sm);
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background var(--transition-fast);
+  border: 1px solid transparent;
+}
+.admin-sidebar__logout:hover { background: rgba(239,68,68,0.1); border-color: var(--color-danger); }
+
+/* Main content area */
+.admin-main {
+  flex: 1;
+  margin-left: 240px;
+  overflow-x: hidden;
+}
+
+.admin-page {
+  padding: var(--space-2xl);
+  max-width: 1200px;
+}
+
+.admin-page-header {
+  margin-bottom: var(--space-2xl);
+}
+.admin-page-header h2 { margin-bottom: 4px; }
+.admin-page-header p { color: var(--text-secondary); }
+
+/* Stats Grid */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: var(--space-md);
+  margin-bottom: var(--space-2xl);
+}
+
+.stat-card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-lg);
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  transition: all var(--transition-normal);
+}
+
+.stat-card:hover { border-color: var(--color-border-hover); transform: translateY(-2px); }
+
+.stat-card__icon {
+  width: 48px; height: 48px;
+  border-radius: var(--radius-md);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.3rem;
+  flex-shrink: 0;
+}
+
+.stat-card__value {
+  font-family: var(--font-heading);
+  font-size: 1.4rem;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.stat-card__label {
+  color: var(--text-muted);
+  font-size: 0.75rem;
+  margin-top: 4px;
+}
+
+/* Admin Row */
+.admin-row { display: flex; gap: var(--space-xl); margin-bottom: var(--space-xl); }
+
+/* Status Breakdown */
+.status-breakdown { display: flex; flex-direction: column; gap: var(--space-sm); }
+.status-breakdown__item { display: flex; align-items: center; justify-content: space-between; padding: var(--space-sm) 0; border-bottom: 1px solid rgba(255,255,255,0.04); }
+.status-breakdown__count { font-family: var(--font-heading); font-weight: 700; }
+
+/* Quick Actions */
+.quick-actions { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-sm); }
+.quick-action-btn {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: var(--space-sm) var(--space-md);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  color: var(--text-secondary);
+  font-family: var(--font-heading);
+  font-size: 0.85rem;
+  text-decoration: none;
+  transition: all var(--transition-fast);
+}
+.quick-action-btn:hover { border-color: var(--color-primary); color: var(--text-primary); background: rgba(124,58,237,0.08); }
+
+/* Admin Filters */
+.admin-filters { display: flex; flex-wrap: wrap; gap: var(--space-sm); margin-bottom: var(--space-xl); }
+
+/* Admin Status Select */
+.admin-status-select {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  padding: 4px 8px;
+  color: var(--text-primary);
+  font-size: 0.8rem;
+  cursor: pointer;
+  max-width: 150px;
+}
+
+/* Admin Theme Card */
+.admin-theme-card { padding: 0; overflow: hidden; }
+.admin-theme-img { height: 120px; overflow: hidden; display: flex; align-items: center; justify-content: center; background: var(--color-surface-hover); }
+.admin-theme-img img { width: 100%; height: 100%; object-fit: cover; }
+.admin-theme-body { padding: var(--space-md); display: flex; flex-direction: column; gap: 4px; }
+.admin-theme-actions { display: flex; gap: var(--space-sm); padding: var(--space-sm) var(--space-md) var(--space-md); }
+
+/* Inventory Alert */
+.inventory-alert {
+  background: rgba(239,68,68,0.08);
+  border: 1px solid rgba(239,68,68,0.3);
+  border-radius: var(--radius-md);
+  padding: var(--space-md);
+  color: var(--color-danger);
+  margin-bottom: var(--space-xl);
+  font-size: 0.9rem;
+}
+
+@media (max-width: 900px) {
+  .admin-sidebar { display: none; }
+  .admin-main { margin-left: 0; }
+  .admin-page { padding: var(--space-lg); }
+  .admin-row { flex-direction: column; }
+}
