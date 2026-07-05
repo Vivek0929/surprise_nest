@@ -35,37 +35,89 @@ SurpriseNest/             ← Git root
 
 ---
 
-## 🚀 Quick Start
+## 🚀 Quick Start & Local Setup
+
+This section outlines the step-by-step process for getting the project running locally for development.
 
 ### Prerequisites
 - Node.js >= 18
-- MongoDB (local or Atlas)
+- Git
+- MongoDB (MongoDB Atlas cloud account)
 
-### 1. Clone & Setup
-
+### 1. Clone the Repository
 ```bash
-git clone <your-repo>
+git clone <your-repo-url>
 cd SurpriseNest
 ```
 
-### 2. Backend Setup
+### 2. MongoDB Setup
+You can use cloud cluster via MongoDB Atlas:
+- 
+- **MongoDB Atlas**: Create a free cluster, get your connection string, and replace `<password>` with your database user password.
 
+### 3. Environment Variables (.env) Setup
+You need to set up environment variables for both the backend and frontend.
+
+**Backend `.env`**
+Navigate to the `backEnd` folder and create a `.env` file (or copy `.env.example` if available). It should look like this:
+```env
+PORT=5000
+NODE_ENV=development
+# Replace with your local MongoDB URI or Atlas Connection String
+MONGO_URI=mongodb://localhost:27017/surprisenest
+JWT_SECRET=your_super_secret_jwt_key
+JWT_REFRESH_SECRET=your_super_secret_refresh_key
+JWT_EXPIRE=7d
+CLIENT_URL=http://localhost:5173
+
+# Cloudinary & Razorpay Keys (Leave default or add your own)
+CLOUDINARY_CLOUD_NAME=your_cloud_name
+CLOUDINARY_API_KEY=your_api_key
+CLOUDINARY_API_SECRET=your_api_secret
+RAZORPAY_KEY_ID=your_razorpay_key
+RAZORPAY_KEY_SECRET=your_razorpay_secret
+
+# Default Admin credentials for seeding
+SEED_ADMIN_EMAIL=admin@surprisenest.com
+SEED_ADMIN_PASSWORD=Admin@123
+DELIVERY_CHARGE=100
+```
+
+**Frontend `.env`**
+Navigate to the `frontEnd` folder and create a `.env` file (or copy `.env.example`). Add the following:
+```env
+# The backend API URL
+VITE_API_URL=http://localhost:5000/api
+```
+
+### 4. Backend Setup & Start
+Open a terminal in the root folder, then run:
 ```bash
 cd backEnd
-cp .env.example .env        # Fill in your values
+
+# 1. Install dependencies
 npm install
-npm run seed                # Seeds DB with demo data
-npm run dev                 # Starts on port 5000
+
+# 2. (First-time only) Seed the database with demo users, themes, and addons
+npm run seed
+
+# 3. Start the development server
+npm run dev
 ```
+The backend should now be running on `http://localhost:5000`.
 
-### 3. Frontend Setup
-
+### 5. Frontend Setup & Start
+Open a NEW terminal in the root folder, then run:
 ```bash
 cd frontEnd
-cp .env.example .env        # Set VITE_API_URL
+
+# 1. Install dependencies
 npm install
-npm run dev                 # Starts on port 5173
+
+# 2. Start the Vite development server
+npm run dev
 ```
+The frontend should now be running on `http://localhost:5173`.
 
 ---
 
