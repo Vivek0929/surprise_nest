@@ -5,7 +5,7 @@ import AdminLayout from './AdminLayout'
 import './Admin.css'
 
 const OCCASIONS = ['Birthday','Anniversary','Farewell','Proposal','Friendship Day','Other']
-const EMPTY = { name:'', description:'', occasions:[], price:'', color:'#7C3AED', items:'', isFeatured:false, isActive:true }
+const EMPTY = { name:'', description:'', occasions:[], price:'', color:'#7C3AED', items:'', images:'', isFeatured:false, isActive:true }
 
 export default function AdminThemes() {
   const [themes, setThemes] = useState([])
@@ -23,7 +23,7 @@ export default function AdminThemes() {
 
   const openAdd = () => { setForm(EMPTY); setEditing(null); setModal(true) }
   const openEdit = (t) => {
-    setForm({ ...t, occasions: t.occasions||[], items: t.items?.join(', ')||'', price: t.price||'' })
+    setForm({ ...t, occasions: t.occasions||[], items: t.items?.join(', ')||'', price: t.price||'', images: t.images?.[0]||'' })
     setEditing(t._id); setModal(true)
   }
 
@@ -31,7 +31,7 @@ export default function AdminThemes() {
     e.preventDefault()
     setSaving(true)
     try {
-      const payload = { ...form, price: Number(form.price), items: form.items.split(',').map(i=>i.trim()).filter(Boolean) }
+      const payload = { ...form, price: Number(form.price), items: form.items.split(',').map(i=>i.trim()).filter(Boolean), images: form.images ? [form.images] : [] }
       if (editing) await updateTheme(editing, payload)
       else await createTheme(payload)
       toast.success(editing ? 'Theme updated!' : 'Theme created!')
@@ -99,6 +99,8 @@ export default function AdminThemes() {
                   <input className="form-input" value={form.name} onChange={e=>setForm({...form,name:e.target.value})} required /></div>
                 <div className="form-group"><label className="form-label">Description</label>
                   <textarea className="form-input" rows={3} value={form.description} onChange={e=>setForm({...form,description:e.target.value})} /></div>
+                <div className="form-group"><label className="form-label">Image URL</label>
+                  <input className="form-input" type="url" value={form.images} onChange={e=>setForm({...form,images:e.target.value})} placeholder="https://images.unsplash.com/..." /></div>
                 <div className="form-group"><label className="form-label">Price (₹)</label>
                   <input className="form-input" type="number" value={form.price} onChange={e=>setForm({...form,price:e.target.value})} required /></div>
                 <div className="form-group"><label className="form-label">Accent Color</label>
