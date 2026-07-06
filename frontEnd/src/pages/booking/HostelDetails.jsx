@@ -5,6 +5,15 @@ import { useAuth } from '../../context/AuthContext'
 import Stepper from '../../components/Stepper'
 import './Booking.css'
 
+const Field = ({ name, label, placeholder, type='text', form, errors, onChange }) => (
+  <div className="form-group">
+    <label className="form-label">{label}</label>
+    <input className={`form-input ${errors[name]?'error':''}`} type={type}
+      name={name} value={form[name]} onChange={onChange} placeholder={placeholder} />
+    {errors[name] && <p className="error-text">{errors[name]}</p>}
+  </div>
+)
+
 export default function HostelDetails() {
   const navigate = useNavigate()
   const { booking, updateBooking } = useBooking()
@@ -34,14 +43,7 @@ export default function HostelDetails() {
     navigate('/book/addons')
   }
 
-  const Field = ({ name, label, placeholder, type='text' }) => (
-    <div className="form-group">
-      <label className="form-label">{label}</label>
-      <input className={`form-input ${errors[name]?'error':''}`} type={type}
-        name={name} value={form[name]} onChange={onChange} placeholder={placeholder} />
-      {errors[name] && <p className="error-text">{errors[name]}</p>}
-    </div>
-  )
+
 
   return (
     <main className="page-wrapper booking-page">
@@ -54,11 +56,11 @@ export default function HostelDetails() {
 
         <div className="card animate-scale">
           <div className="hostel-form">
-            <Field name="receiverName" label="Receiver's Name" placeholder="John Doe" />
-            <Field name="hostelName" label="Hostel Name" placeholder="Sunrise Boys Hostel" />
-            <Field name="roomNumber" label="Room Number" placeholder="Block A, Room 204" />
-            <Field name="collegeName" label="College / University Name" placeholder="ABC Engineering College" />
-            <Field name="mobileNumber" label="Receiver's Mobile Number" placeholder="9876543210" type="tel" />
+            <Field name="receiverName" label="Receiver's Name" placeholder="John Doe" form={form} errors={errors} onChange={onChange} />
+            <Field name="hostelName" label="Hostel Name" placeholder="Sunrise Boys Hostel" form={form} errors={errors} onChange={onChange} />
+            <Field name="roomNumber" label="Room Number" placeholder="Block A, Room 204" form={form} errors={errors} onChange={onChange} />
+            <Field name="collegeName" label="College / University Name" placeholder="ABC Engineering College" form={form} errors={errors} onChange={onChange} />
+            <Field name="mobileNumber" label="Receiver's Mobile Number" placeholder="9876543210" type="tel" form={form} errors={errors} onChange={onChange} />
           </div>
         </div>
 
