@@ -5,6 +5,7 @@ import { BookingProvider } from './context/BookingContext'
 import Navbar from './components/Navbar'
 import Footer from './components/Footer'
 import ProtectedRoute from './components/ProtectedRoute'
+import Chatbot from './components/Chatbot'
 
 // Public Pages
 import Home from './pages/Home'
@@ -87,6 +88,7 @@ function App() {
           </Routes>
 
           <Footer />
+          <Chatbot />
 
           <Toaster
             position="top-right"

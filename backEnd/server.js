@@ -12,6 +12,7 @@ const orderRoutes = require('./src/routes/order.routes');
 const adminRoutes = require('./src/routes/admin.routes');
 const deliveryRoutes = require('./src/routes/delivery.routes');
 const reviewRoutes = require('./src/routes/review.routes');
+const chatbotRoutes = require('./src/routes/chatbot.routes');
 
 // Connect to MongoDB
 connectDB();
@@ -37,6 +38,7 @@ app.use('/api/orders', orderRoutes);
 app.use('/api/admin', adminRoutes);
 app.use('/api/delivery', deliveryRoutes);
 app.use('/api/reviews', reviewRoutes);
+app.use('/api/chatbot', chatbotRoutes);
 
 // ─── Health check ─────────────────────────────────────────────────────────────
 app.get('/api/health', (req, res) => {

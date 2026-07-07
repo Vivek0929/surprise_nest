@@ -75,7 +75,10 @@ const orderSchema = new mongoose.Schema(
 // Push initial status to history on create
 orderSchema.pre('save', function (next) {
   if (this.isNew) {
+    this._isNew = true;
     this.statusHistory.push({ status: 'placed', note: 'Order placed successfully' });
+  } else if (this.isModified('status')) {
+    this._statusChanged = true;
   }
   next();
 });

@@ -27,9 +27,19 @@ async function checkConnection() {
   console.log('\n⏳ STEP 2 — Checking internet & DNS...');
   try {
     // Extract hostname from mongodb+srv://
-    const hostname = uri.split('@')[1]?.split('/')[0];
+    let hostname = uri.split('@')[1]?.split('/')[0]?.split('?')[0];
     if (hostname) {
-      await dns.lookup(hostname);
+      if (hostname.includes(',')) {
+        hostname = hostname.split(',')[0];
+      }
+      if (hostname.includes(':')) {
+        hostname = hostname.split(':')[0];
+      }
+      if (uri.startsWith('mongodb+srv://')) {
+        await dns.resolveTxt(hostname);
+      } else {
+        await dns.lookup(hostname);
+      }
       console.log('✅ STEP 2 — DNS resolved:', hostname);
     }
   } catch (err) {
